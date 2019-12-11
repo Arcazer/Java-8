@@ -1,0 +1,27 @@
+name: Java CI
+
+# list with singe event
+on: [push]
+
+jobs:
+  build: #job_id is named build
+    runs-on: ubuntu-latest #virtual environment that runs this build job
+
+    steps:
+    - uses: actions/checkout@v1 # some predefined action
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8 # parameters that are required for the action 'actions/setup-java@v1'
+    - name: Build with Maven
+      # '-B' = non interactive batch mode
+      # '--file pom.xml' = can be used if pom.xml is named differently, without '--file' mvn would look per default for pom.xml
+      # 'package' = lifecycle just create jar   
+      run: mvn -B package --file pom.xml
+    - name: Run Sonarqube
+      env:
+        SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
+      run: mvn verify sonar:sonar -DSonar.login=$SONAR_LOGIN   
+      
+      
+      
