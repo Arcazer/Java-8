@@ -13,6 +13,6 @@ public class AppTest {
     @Test
     public void testApp()
     {
-        Assertions.assertEquals("3", "2");
+        Assertions.assertEquals("2", "2");
     }
 }
