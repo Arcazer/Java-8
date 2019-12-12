@@ -4,16 +4,18 @@
   <groupId>com.arcazer</groupId>
   <artifactId>Java-8</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>Java-8</name>
   <!-- <url>http://maven.apache.org</url> -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
     <sonar.projectKey>Arcazer_Java-8</sonar.projectKey>
     <sonar.organization>arcazer</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+    <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
+    <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <junit.jupiter.version>5.5.2</junit.jupiter.version>
     <junit.platform.version>1.5.2</junit.platform.version>
   </properties>
@@ -25,7 +27,6 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>${junit.jupiter.version}</version>
-      <!-- <scope>test</scope> -->
     </dependency>
 
     <dependency>
@@ -37,17 +38,32 @@
 
   </dependencies>
 
-  <!-- <build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
-			</plugin>
-		</plugins>
-	</build> -->
+  <build>
+    <plugins>
 
+      <!-- Java Code Coverage plugin with goal report-->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <executions>
+          <!-- prepare agent goal is required else report can't find execution file -->
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+    </plugins>
+  </build>
 </project>
