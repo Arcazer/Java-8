@@ -3,23 +3,29 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.arcazer</groupId>
-	<artifactId>Java-8</artifactId>
+	<artifactId>Java-11</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>Java-8</name>
+	<name>Java-11</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+		<!-- Java Version -->
+		<maven.compiler.release>11</maven.compiler.release>
+		<!-- SonarCloud projektKey/name is used as ID -->
 		<sonar.projectKey>Arcazer_Java-8</sonar.projectKey>
 		<sonar.organization>arcazer</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
 		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-		
+
+		<!-- dependencies version -->
 		<junit.jupiter.version>5.5.2</junit.jupiter.version>
 		<junit.platform.version>1.5.2</junit.platform.version>
 		<logging.log4j.version>2.13.3</logging.log4j.version>
+
+		<!-- plugins version -->
+		<maven.version>3.8.1</maven.version>
+		<jacoco.version>0.8.5</jacoco.version>
 	</properties>
 
 	<dependencies>
@@ -54,12 +60,19 @@
 
 	<build>
 		<plugins>
+			<!-- Set the maven compiler version else a default(deprecated?) version 
+				is used -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.version}</version>
+			</plugin>
 
 			<!-- Java Code Coverage plugin with goal report -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
+				<version>${jacoco.version}</version>
 				<executions>
 					<!-- prepare agent goal is required else report can't find execution 
 						file -->
