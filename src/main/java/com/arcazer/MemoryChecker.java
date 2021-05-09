@@ -1,8 +1,10 @@
 package com.arcazer;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+
+@SuppressWarnings("all")
 public class MemoryChecker {
 	private static final long MEBIBYTE = 1024L * 1024L;
 
@@ -15,16 +17,16 @@ public class MemoryChecker {
 
 	// Java Arraylist size on 32bit is 4byte + storedObj size per element
 	// here storedObj is store as UTF-8(Eclipse Setting) --> size= stringlength
-	// e.g. math.random retun string with 18 chars --> 18byte
+	// e.g. math.random return string with 18 chars --> 18byte
 	// Total 4 byte + 18byte per list element
-	public static void simpleMemoryCheck() throws UnsupportedEncodingException {
+	public static void simpleMemoryCheck() {
 		var list = new ArrayList<String>();
-		for (int i = 0; i <= 10_000_000; i++) {
+		for (var i = 0; i <= 10_000_000; i++) {
 			list.add(String.valueOf(Math.random()));
 		}
 
 		System.out.printf("String length:%s%n", list.get(0).length());
-		System.out.printf("String size in bytes: %d%n", list.get(0).getBytes("UTF-8").length);
+		System.out.printf("String size in bytes: %d%n", list.get(0).getBytes(StandardCharsets.UTF_8).length);
 		Runtime runtime = Runtime.getRuntime();
 
 		System.out.printf("Total memory in bytes: %d%n", runtime.totalMemory());
