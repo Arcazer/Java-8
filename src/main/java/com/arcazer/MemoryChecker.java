@@ -3,7 +3,6 @@ package com.arcazer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-
 @SuppressWarnings("all")
 public class MemoryChecker {
 	private static final long MEBIBYTE = 1024L * 1024L;
@@ -21,7 +20,7 @@ public class MemoryChecker {
 	// Total 4 byte + 18byte per list element
 	public static void simpleMemoryCheck() {
 		var list = new ArrayList<String>();
-		for (var i = 0; i <= 10_000_000; i++) {
+		for (var i = 0; i <= 10; i++) {
 			list.add(String.valueOf(Math.random()));
 		}
 
