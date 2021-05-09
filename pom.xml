@@ -21,7 +21,9 @@
 		<!-- dependencies version -->
 		<junit.jupiter.version>5.5.2</junit.jupiter.version>
 		<junit.platform.version>1.5.2</junit.platform.version>
+		<org.hamcrest.version>2.2</org.hamcrest.version>
 		<logging.log4j.version>2.13.3</logging.log4j.version>
+
 
 		<!-- plugins version -->
 		<maven.version>3.8.1</maven.version>
@@ -29,19 +31,27 @@
 	</properties>
 
 	<dependencies>
-		<!-- JUnit testing dependencies -->
-		<!-- Contains jupiter-engine , -params and -api -->
+		<!-- JUnit and Hamcrest testing dependencies -->
+		<!-- JUnit5 = JUnit Platform + JUnit Jupiter + JUnit Vintage -->
+		<!-- Jupiter contains jupiter-engine , -params and -api -->
+		<!-- We don't need Vintage for JUnit3or4 -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${junit.jupiter.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-launcher</artifactId>
 			<version>${junit.platform.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>${org.hamcrest.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 
 		<!-- Logging dependencies -->
 		<dependency>
@@ -53,6 +63,13 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${logging.log4j.version}</version>
+		</dependency>
+
+		<!-- Other dependencies -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
 		</dependency>
 
 
